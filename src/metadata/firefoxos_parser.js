@@ -86,9 +86,9 @@ module.exports.prototype = {
         shell.rm('-rf', this.www_dir());
         shell.mkdir(this.www_dir());
         // Copy over all app www assets
-        shell.cp('-rf', path.join(app_www, '*'), this.www_dir());
+        shell.cp('-rfL', path.join(app_www, '*'), this.www_dir());
         // Copy over stock platform www assets (cordova.js)
-        shell.cp('-rf', path.join(platform_www, '*'), this.www_dir());
+        shell.cp('-rfL', path.join(platform_www, '*'), this.www_dir());
     },
 
     update_overrides: function() {
@@ -96,7 +96,7 @@ module.exports.prototype = {
         var mergesPath = path.join(util.appDir(projectRoot), 'merges', 'firefoxos');
         if(fs.existsSync(mergesPath)) {
             var overrides = path.join(mergesPath, '*');
-            shell.cp('-rf', overrides, this.www_dir());
+            shell.cp('-rfL', overrides, this.www_dir());
         }
     },
     staging_dir: function() {
@@ -107,7 +107,7 @@ module.exports.prototype = {
         var stagingDir = path.join(this.path, '.staging', 'www');
 
         if(fs.existsSync(stagingDir)) {
-            shell.cp('-rf',
+            shell.cp('-rfL',
                      path.join(stagingDir, '*'),
                      this.www_dir());
         }

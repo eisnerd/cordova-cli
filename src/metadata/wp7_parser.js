@@ -153,7 +153,7 @@ module.exports.prototype = {
         var merges_path = path.join(util.appDir(util.isCordova(this.wp7_proj_dir)), 'merges', merges_sub_path);
         if (fs.existsSync(merges_path)) {
             var overrides = path.join(merges_path, '*');
-            shell.cp('-rf', overrides, this.www_dir());
+            shell.cp('-rfL', overrides, this.www_dir());
         }
     },
 
@@ -173,13 +173,13 @@ module.exports.prototype = {
         shell.rm('-rf', this.www_dir());
         shell.mkdir(this.www_dir());
         // Copy over all app www assets
-        shell.cp('-rf', path.join(app_www, '*'), this.www_dir());
+        shell.cp('-rfL', path.join(app_www, '*'), this.www_dir());
 
         // Copy all files from merges directories - wp generic first, then wp7 specific.
         this.copy_merges('wp');
         this.copy_merges('wp7');
         // Copy over stock platform www assets (cordova.js)
-        shell.cp('-rf', path.join(platform_www, '*'), this.www_dir());
+        shell.cp('-rfL', path.join(platform_www, '*'), this.www_dir());
     },
 
     // updates the csproj file to explicitly list all www content.
@@ -247,7 +247,7 @@ module.exports.prototype = {
         var projectRoot = util.isCordova(this.wp7_proj_dir);
         if (fs.existsSync(this.staging_dir())) {
             var staging = path.join(this.staging_dir(), '*');
-            shell.cp('-rf', staging, this.www_dir());
+            shell.cp('-rfL', staging, this.www_dir());
         }
     },
 

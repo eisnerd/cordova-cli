@@ -141,7 +141,7 @@ module.exports = function create (dir, id, name, cfg) {
             }
         } else {
             shell.mkdir(www_dir);
-            shell.cp('-rf', path.join(www_lib, '*'), www_dir);
+            shell.cp('-rfL', path.join(www_lib, '*'), www_dir);
         }
 
         // Create basic project structure.

@@ -153,7 +153,7 @@ module.exports.prototype = {
         // remove stock platform assets
         shell.rm('-rf', this.www_dir());
         // copy over all app www assets
-        shell.cp('-rf', www, platformWww);
+        shell.cp('-rfL', www, platformWww);
 
         // write out android lib's cordova.js
         var custom_path = project_config.has_custom_path(projectRoot, 'android');
@@ -172,7 +172,7 @@ module.exports.prototype = {
         var merges_path = path.join(util.appDir(projectRoot), 'merges', 'amazon-fireos');
         if (fs.existsSync(merges_path)) {
             var overrides = path.join(merges_path, '*');
-            shell.cp('-rf', overrides, this.www_dir());
+            shell.cp('-rfL', overrides, this.www_dir());
         }
     },
 
@@ -180,7 +180,7 @@ module.exports.prototype = {
     update_staging:function() {
         if (fs.existsSync(this.staging_dir())) {
             var staging = path.join(this.staging_dir(), '*');
-            shell.cp('-rf', staging, this.www_dir());
+            shell.cp('-rfL', staging, this.www_dir());
         }
     },
 

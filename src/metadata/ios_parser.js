@@ -138,9 +138,9 @@ module.exports.prototype = {
         shell.rm('-rf', this.www_dir());
         shell.mkdir(this.www_dir());
         // Copy over all app www assets
-        shell.cp('-rf', path.join(app_www, '*'), this.www_dir());
+        shell.cp('-rfL', path.join(app_www, '*'), this.www_dir());
         // Copy over stock platform www assets (cordova.js)
-        shell.cp('-rf', path.join(platform_www, '*'), this.www_dir());
+        shell.cp('-rfL', path.join(platform_www, '*'), this.www_dir());
     },
 
     // update the overrides folder into the www folder
@@ -149,7 +149,7 @@ module.exports.prototype = {
         var merges_path = path.join(util.appDir(projectRoot), 'merges', 'ios');
         if (fs.existsSync(merges_path)) {
             var overrides = path.join(merges_path, '*');
-            shell.cp('-rf', overrides, this.www_dir());
+            shell.cp('-rfL', overrides, this.www_dir());
         }
     },
 
@@ -158,7 +158,7 @@ module.exports.prototype = {
         var projectRoot = util.isCordova(this.path);
         if (fs.existsSync(this.staging_dir())) {
             var staging = path.join(this.staging_dir(), '*');
-            shell.cp('-rf', staging, this.www_dir());
+            shell.cp('-rfL', staging, this.www_dir());
         }
     },
 

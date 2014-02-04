@@ -140,7 +140,7 @@ module.exports.prototype = {
         var www = util.projectWww(projectRoot);
 
         shell.rm('-rf', this.www_dir());
-        shell.cp('-rf', www, this.path);
+        shell.cp('-rfL', www, this.path);
     },
 
     update_overrides:function() {
@@ -148,7 +148,7 @@ module.exports.prototype = {
         var mergesPath = path.join(util.appDir(projectRoot), 'merges', 'ubuntu');
         if(fs.existsSync(mergesPath)) {
             var overrides = path.join(mergesPath, '*');
-            shell.cp('-rf', overrides, this.www_dir());
+            shell.cp('-rfL', overrides, this.www_dir());
         }
     },
 
@@ -157,7 +157,7 @@ module.exports.prototype = {
         var stagingDir = path.join(this.path, '.staging', 'www');
 
         if(fs.existsSync(stagingDir)) {
-            shell.cp('-rf',
+            shell.cp('-rfL',
                      path.join(stagingDir, '*'),
                      this.www_dir());
         }
